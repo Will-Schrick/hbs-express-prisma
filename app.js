@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const { create } = require('express-handlebars');
+
 const hbs = create({
   extname: 'hbs',
   defaultLayout: 'main',
@@ -22,8 +23,8 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 
 const router = require('./routes');
-app.use('/', router);
+app.use('/', router); // Handles `/` via index.js
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
+  console.log(`Server Running on  ${PORT}`);
 });

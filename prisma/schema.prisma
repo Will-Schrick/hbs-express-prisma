@@ -21,4 +21,3 @@ model Post {
   content   String?
   published Boolean  @default(false)
 }
-

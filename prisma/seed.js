@@ -1,35 +1,44 @@
 const { PrismaClient } = require('@prisma/client');
-const { faker } = require('@faker-js/faker');
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.post.deleteMany(); // borra todos los usuarios antes del llenarlo
-
-  const posts = [];
-  const numberOfPosts = 50;
-
-  for (i = 0; i < numberOfPosts; i++) {
-
-
-    const post = {
-      published: faker.datatype.boolean()
-      
-    };
-
-    posts.push(post);
-  }
-
   await prisma.post.createMany({
-    data: posts,
-    skipDuplicates: true,
+    data: [
+      {
+        title: 'First Post',
+        content: 'Contenido del first post',
+        published: true,
+      },
+      {
+        title: 'Second Post',
+        content: 'Contenido del second post',
+        published: false,
+      },
+      {
+        title: 'Third Post',
+        content: 'Contenido del third post',
+        published: true,
+      },
+      {
+        title: 'Fourth Post',
+        content: 'Contenido del fourth post',
+        published: false,
+      },
+      {
+        title: 'Fifth Post',
+        content: 'Contenido del fifth post',
+        published: true,
+      },
+    ],
   });
+  console.log('Database seeded with posts!');
 }
+
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
+  .catch((e) => {
     console.error(e);
-    await prisma.$disconnect();
     process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
   });

@@ -1,0 +1,21 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>{{post.title}}</title>
+  </head>
+  <body>
+    <h1>{{post.title}}</h1>
+    <p>{{post.content}}</p>
+    <p>Published: {{#if post.published}}Sí{{else}}No{{/if}}</p>
+    <p>Created On: {{post.createdAt}}</p>
+    <p>Last Updated: {{post.updatedAt}}</p>
+    <a href='/posts/{{post.id}}/edit'>Edit Post</a>
+
+    <form action='/posts/{{post.id}}?_method=DELETE' method='POST'>
+      <button type='submit'>Delete</button>
+    </form>
+
+    <a href='/posts'>Go back to all posts</a>
+  </body>
+</html>
